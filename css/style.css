@@ -8,6 +8,7 @@
   --aureloaLuna--color:#445;
   --nav-hoverColor: rgb(105, 0, 0);
   --nav-color: rgb(139, 1, 1);
+  --text-nav-color: rgb(196, 195, 157);
 }
 
 body {
@@ -16,39 +17,55 @@ body {
 }
 
 .nav {
-  width: 100%;
+  /* width: 100%;
   height: 45px;
-  background-color: rgb(139, 1, 1);
-  overflow: hidden;
-}
-
-.ul-lista {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  margin-left: 50px;
+  background-color: var(--nav-color); */
+  overflow: hidden; /* para que todo lo que sobresalga del nav este oculto */
   
 }
 
-.lista {
-  margin: 0;
-  padding: 13px;
-  text-decoration: none;
-  color: #ccc;
-  font-weight: bold;
-  font-size: 20px;
-  float: left;
+.hamb-menu {
+  display: none; /* para ocultar el icono menu-hamb mientras la pag sea mayor a 720px */
 }
 
-.lista:hover {
+.close-menu {
+  display: none; /* para ocultar el icono close-menu mientras la pag sea mayor a 720px */
+}
+
+#evento-click {
+  display: none; /*se oculta el checkbox*/
+}
+
+.ul-lista {
+  display: flex;
+  margin: 0;
+  padding: 2vh;
+  list-style-type: none;
+  background-color: var(--nav-color);
+  
+}
+
+.a-lista {
+  margin: 0;
+  padding: 2vh;
+  text-decoration: none;
+  color: var(--luna-color);
+  font-weight: bold;
+  font-size: 1.3rem;
+
+}
+
+.a-lista:hover {
   background: var(--nav-hoverColor);
   box-shadow: inset 0 0 10px var(--nav-color);
+  color: var(--text-nav-color);
 }
 
 .cielo {
   position: relative; /* para que el recuadro cielo se posicione dentro de la pagina */
   width: 100%;
   height: 400px;
+  margin: 0;
   /* background: var(--cielo-color); */
   top:0px;
   background: var(--noche-color);
@@ -57,9 +74,9 @@ body {
         var(--luna-color),
         var(--luna-color) 20%,
         var(--aureloaLuna--color) 21%,
-        var(--noche-color) 100% */
-      );
-  overflow: hidden; /* para que todo lo que escape del recuadro se oculte */
+        var(--noche-color) 100% 
+      ); */
+  overflow: hidden; /* para que todo lo que sobresalga del recuadro se oculte */
   opacity: 100%;
 }
 
@@ -113,17 +130,17 @@ body {
 .arbol {
   position: absolute;
   width: 400px;
-  bottom: -60px;
+  bottom: -6vh;
   right: 1%;
   filter: blur(1px);
   z-index: 5;
-   /*animacion*/
-   animation-name: mover3;
-   animation-duration: 20s;
-   animation-iteration-count: infinite;
-   animation-direction: alternate;
-   animation-timing-function: linear;
-   transform-origin: bottom;
+  /*animacion*/
+  animation-name: mover3;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  transform-origin: bottom;
 }
 
 @keyframes mover3 {
@@ -147,14 +164,14 @@ body {
   opacity: 80%;
   z-index: 1;
   /*animacion*/
-  animation-name: mover;
+  /* animation-name: mover;
   animation-duration: 180s;
   animation-iteration-count: infinite;
   animation-direction: reverse;
-  animation-timing-function: linear;
+  animation-timing-function: linear; */
 }
 
-@keyframes mover {
+/* @keyframes mover {
   0% {
     transform: translateX(50%) translateY(-50%) scale(0.5);
   }
@@ -164,7 +181,7 @@ body {
   100% {
     transform: translateX(-70%) translateY(50%) scale(2);
   }
-}
+} */
 
 
 
@@ -230,3 +247,54 @@ body {
   filter: blur(2px);
 }
 
+@media (max-width:720px){
+  .cielo {
+    z-index: 0; /* para que el paisaje quede abajo del menu */
+  }
+  .nube-1 {
+    right: -45%;
+  }
+  .nube-2 {
+    right: 40%;
+  }
+  .ul-lista {
+    position: fixed;
+    display: none;
+    top: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;  /* para que el menu quede arriba del paisaje */
+  }
+  .li-lista {
+    padding: 3vh;
+  }
+  .hamb-menu {
+    display: block; /* para que aparezca el icono menu-hamb cuando la pag es menor a 720px */
+    position: absolute; /* para que quede dentro del navegador */
+    top: 1rem;
+    right: 1rem;
+    filter: invert(1); /* para que el icono negro se vuelva blanco */
+    z-index: 100;
+    cursor: pointer; /* cuando pasa el cursor arriba del icono aparece la manito */
+  }
+  .close-menu {
+    position: absolute;
+    display: none;
+    filter: invert(1); /* para que el icono negro se vuelva blanco */
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    cursor: pointer; /* cuando pasa el cursor arriba del icono aparece la manito */
+  }
+  #evento-click:checked ~ .ul-lista {
+    display: flex;
+  }
+
+  #evento-click:checked ~ .close-menu {
+    display: flex;
+    z-index: 110;
+  }
+
+}
